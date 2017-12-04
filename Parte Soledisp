@@ -1,0 +1,520 @@
+//Primera parte
+package proyecto;
+
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.util.LinkedList;
+
+public class LeerProfesor {
+    /**
+ * @author Ariana Ochoa
+ * @author Karina Sailema
+ * @author Aldair Soledispa
+ * Esta clase Leemos y modificamos el fichero profesor
+ */
+    private boolean band=true;
+     /**
+     * @return  LinkedList<Profesoro> retornamos una lista de Profesores 
+     * Cargamos todos los profesores del archivo profesores.txt
+     */
+    public LinkedList<Profesor> cargarProfesor() {
+        FileReader fr;
+        BufferedReader br = null;
+        String linea;
+        String valores[];
+        Profesor p1;
+        LinkedList<Profesor> profesor=new LinkedList<>();
+        
+        try {
+            int acum=0;
+            fr = new FileReader("profesores.txt");
+            br = new BufferedReader(fr);
+            
+            while ((linea = br.readLine()) != null) {
+                if(acum==1){
+                    
+                    valores = linea.split(",", 10);
+                    p1 = new Profesor();
+                    p1.nombre=valores[0];
+                    p1.apellido=valores[1];
+                    p1.edad=Integer.parseInt(valores[2]);
+                    p1.varita=valores[3];
+                    p1.fechaIngreso=valores[4];
+                    p1.tipo=valores[5];
+                    p1.animal=valores[6];
+                    p1.hechizo=valores[7];
+                    p1.pocion=valores[8];
+                    p1.deporte=valores[9];
+
+                    profesor.add(p1);
+                }else{
+                    acum=1;
+                }
+            }
+        } catch (FileNotFoundException ex) {
+            System.out.println("El archivo no existe");
+        } catch (IOException ex) {
+            System.out.println("Error de Lectura");
+        }
+        return profesor;
+    }
+    /**
+     * @param  Profesor profesor  recibe como parametro un Profesor
+     * Guardamos un profesor en el archivo profesores.txt
+     */
+    public void guardarProfesor(Profesor profesor) {
+        FileWriter fw;
+        BufferedWriter bw;
+        PrintWriter pw;
+
+        try {
+            fw = new FileWriter("profesores.txt",true);
+            bw = new BufferedWriter(fw);
+            pw = new PrintWriter(bw);
+            pw.write(profesor.nombre+",");
+            pw.write(profesor.apellido+",");
+            pw.write(profesor.edad+",");
+            pw.write(profesor.varita+",");
+            pw.write(profesor.fechaIngreso+",");
+            pw.write(profesor.tipo+",");
+            pw.write(profesor.animal+",");
+            pw.write(profesor.hechizo+",");
+            pw.print(profesor.pocion+",");
+            pw.println(profesor.deporte);
+            pw.close();
+            bw.close();
+            
+            System.out.println("\nSe ha creado con exito el Profesor\n ");
+            System.out.println(profesor);
+            
+        } catch (IOException ex) {
+            System.out.println("ERROR: No se puedo guardar el profesor");
+        }
+    }
+   
+    
+}
+
+//Segunda parte   
+package proyecto;
+
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.util.LinkedList;
+
+public class LeerRegistro {
+   
+// * @author Ariana Ochoa
+// * @author Karina Sailema
+// * @author Aldair Soledispa
+// * Esta clase Leemos y modificamos el fichero registro
+// */
+
+    private boolean band=true;
+     /**
+     * @return  LinkedList<Registro> retornamos una lista de Registros
+     * Cargamos todos los registros al sistema 
+     */
+    public LinkedList<Registro> cargarRegistro( ) {
+        FileReader fr;
+        BufferedReader br = null;
+        String linea;
+        String valores[];
+        Registro r1;
+        LinkedList<Registro> registro=new LinkedList<>();
+        
+        try {
+            int acum=0;
+            fr = new FileReader("registros.txt");
+            br = new BufferedReader(fr);
+            
+            while ((linea = br.readLine()) != null) {
+                if(acum==1){
+                    valores = linea.split(",", 10);
+                    r1 = new Registro();
+                    r1.fecha=valores[0];
+                    r1.nombre=valores[1];
+                    r1.apellido=valores[3];
+                    r1.materia=valores[4];
+                    r1.tipo=valores[5];
+                    registro.add(r1);
+                }else{
+                    acum=1;
+                }
+            }
+        } catch (FileNotFoundException ex) {
+            System.out.println("El archivo no existe");
+        } catch (IOException ex) {
+            System.out.println("Error de Lectura");
+        }
+        return registro;
+    }
+    /**
+     * @param  Registro registro  recibe como parametro un Registro
+     * Guardamos un registro de una materia
+     */
+    public void guardarRegistro( Registro registro) {
+        FileWriter fw;
+        BufferedWriter bw;
+        PrintWriter pw;
+
+        try {
+            fw = new FileWriter("registros.txt",true);
+            bw = new BufferedWriter(fw);
+            pw = new PrintWriter(bw);
+            pw.write(registro.fecha+",");
+            pw.write(registro.nombre+",");
+            pw.write(registro.apellido+",");
+            pw.write(registro.materia+",");
+            pw.println(registro.tipo);
+            pw.close();
+            bw.close();  
+            System.out.println("\nSe ha creado con exito el Curso\n ");
+            System.out.println(registro);
+        } catch (IOException ex) {
+            System.out.println("ERROR: No se puedo guardar el registro");
+        }
+    }
+}
+
+//Tercera parte   
+package proyecto;
+
+/**
+ * @author Ariana Ochoa
+ * @author Karina Sailema
+ * @author Aldair Soledispa
+ * 
+ */
+public class Persona {
+    public String nombre;
+    public String apellido;
+    public int edad=0;
+    public String casa;
+    public String varita;
+    public String tipo;
+    /**
+     * Contructor vacio para crear objetos
+     */
+    public Persona() {
+    }
+    /**
+     * Contructor con parametros
+     */
+    public Persona(String nombre, String apellido, int edad, String casa, String varita, String tipo) {
+        this.nombre = nombre;
+        this.apellido = apellido;
+        this.edad = edad;
+        this.casa = casa;
+        this.varita = varita;
+        this.tipo = tipo;
+    }
+    
+    public String getNombre() {
+        return nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public String getApellido() {
+        return apellido;
+    }
+
+    public void setApellido(String apellido) {
+        this.apellido = apellido;
+    }
+
+    public int getEdad() {
+        return edad;
+    }
+
+    public void setEdad(int edad) {
+        this.edad = edad;
+    }
+
+    public String getCasa() {
+        return casa;
+    }
+
+    public void setCasa(String casa) {
+        this.casa = casa;
+    }
+
+    public String getVarita() {
+        return varita;
+    }
+
+    public void setVarita(String varita) {
+        this.varita = varita;
+    }
+
+    public String getTipo() {
+        return tipo;
+    }
+
+    public void setTipo(String tipo) {
+        this.tipo = tipo;
+    }
+
+    @Override
+    public String toString() {
+        return "Persona{" + "nombre=" + nombre + ", apellido=" + apellido + ", edad=" + edad + ", casa=" + casa + ", varita=" + varita + ", tipo=" + tipo + '}';
+    }
+    
+    
+}
+
+//Cuarta parte
+package proyecto;
+
+/**
+ * @author Ariana Ochoa
+ * @author Karina Sailema
+ * @author Aldair Soledispa
+ * 
+ */
+public class Registro {
+    public String fecha;
+    public String nombre;
+    public String apellido;
+    public String materia;
+    public String tipo;
+
+    /**
+     * Contructor vacio para crear objetos
+     */
+    
+    
+    public Registro() {
+    }
+    /**
+     * Contructor con parametros
+     */
+    public Registro(String fecha, String nombre, String apellido, String materia, String tipo) {
+        this.fecha = fecha;
+        this.nombre = nombre;
+        this.apellido = apellido;
+        this.materia = materia;
+        this.tipo = tipo;
+    }
+
+    public String getFecha() {
+        return fecha;
+    }
+
+    public void setFecha(String fecha) {
+        this.fecha = fecha;
+    }
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public String getApellido() {
+        return apellido;
+    }
+
+    public void setApellido(String apellido) {
+        this.apellido = apellido;
+    }
+
+    public String getMateria() {
+        return materia;
+    }
+
+    public void setMateria(String materia) {
+        this.materia = materia;
+    }
+
+    public String getTipo() {
+        return tipo;
+    }
+
+    public void setTipo(String tipo) {
+        this.tipo = tipo;
+    }
+
+    @Override
+    public String toString() {
+        return "Registro{" + "fecha=" + fecha + ", nombre=" + nombre + ", apellido=" + apellido + ", materia=" + materia + ", tipo=" + tipo + '}';
+    }
+}
+
+//Quinta parte
+package proyecto;
+
+
+/**
+ * @author Ariana Ochoa
+ * @author Karina Sailema
+ * @author Aldair Soledispa
+ * Un Profesor es una Persona por lo cual no es necesario crear de nuevo todas las variables
+ */
+public class Profesor extends Persona {
+    
+    public String fechaIngreso;
+    public String animal="null";
+    public String hechizo="null";
+    public String pocion="null";
+    public String deporte="null";
+    /**
+     * Contructor vacio para crear objetos
+     */
+    public Profesor() {
+        
+    }
+    /**
+     * Contructor con parametros
+     */
+    public Profesor(String fechaIngreso, String animal, String hechizo, String pocion, String deporte, String nombre, String apellido, int edad, String casa, String varita, String tipo) {
+        super(nombre, apellido, edad, casa, varita, tipo);
+        this.fechaIngreso = fechaIngreso;
+        this.animal = animal;
+        this.hechizo = hechizo;
+        this.pocion = pocion;
+        this.deporte = deporte;
+    }
+
+    public String getFechaIngreso() {
+        return fechaIngreso;
+    }
+
+    public void setFechaIngreso(String fechaIngreso) {
+        this.fechaIngreso = fechaIngreso;
+    }
+
+    public String getAnimal() {
+        return animal;
+    }
+
+    public void setAnimal(String animal) {
+        this.animal = animal;
+    }
+
+    public String getHechizo() {
+        return hechizo;
+    }
+
+    public void setHechizo(String hechizo) {
+        this.hechizo = hechizo;
+    }
+
+    public String getPocion() {
+        return pocion;
+    }
+
+    public void setPocion(String pocion) {
+        this.pocion = pocion;
+    }
+
+    public String getDeporte() {
+        return deporte;
+    }
+
+    public void setDeporte(String deporte) {
+        this.deporte = deporte;
+    }
+
+    @Override
+    public String toString() {
+        return "\nNOMBRE: " + nombre + " " + apellido + "\nEDAD: " + edad + " años\nVARITA: " + varita + "\nFECHA DE INGRESO: " + fechaIngreso + "\nTIPO: " + tipo + "\nANIMAL: " + animal + "\nHECHIZO: " + hechizo + "\nPOCION: " + pocion + "\nDEPORTE: " + deporte ;
+    }
+}
+
+
+//Sexta parte
+package objetos;
+
+/**
+ * @author Ariana Ochoa
+ * @author Karina Sailema
+ * @author Aldair Soledispa
+ * 
+ */
+public class Registro {
+    public String fecha;
+    public String nombre;
+    public String apellido;
+    public String materia;
+    public String tipo;
+
+    /**
+     * Contructor vacio para crear objetos
+     */
+    
+    
+    public Registro() {
+    }
+    /**
+     * Contructor con parametros
+     */
+    public Registro(String fecha, String nombre, String apellido, String materia, String tipo) {
+        this.fecha = fecha;
+        this.nombre = nombre;
+        this.apellido = apellido;
+        this.materia = materia;
+        this.tipo = tipo;
+    }
+
+    public String getFecha() {
+        return fecha;
+    }
+
+    public void setFecha(String fecha) {
+        this.fecha = fecha;
+    }
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public String getApellido() {
+        return apellido;
+    }
+
+    public void setApellido(String apellido) {
+        this.apellido = apellido;
+    }
+
+    public String getMateria() {
+        return materia;
+    }
+
+    public void setMateria(String materia) {
+        this.materia = materia;
+    }
+
+    public String getTipo() {
+        return tipo;
+    }
+
+    public void setTipo(String tipo) {
+        this.tipo = tipo;
+    }
+
+    @Override
+    public String toString() {
+        return "Registro{" + "fecha=" + fecha + ", nombre=" + nombre + ", apellido=" + apellido + ", materia=" + materia + ", tipo=" + tipo + '}';
+    }
+}
+
