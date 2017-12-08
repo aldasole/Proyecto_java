@@ -1,0 +1,83 @@
+/**
+ * @author 
+ * 
+ */
+public class Persona {
+    public String nombre;
+    public String apellido;
+    public int edad=0;
+    public String casa;
+    public String varita;
+    public String tipo;
+    /**
+     * Contructor vacio para crear objetos
+     */
+    public Persona() {
+    }
+    /**
+     * Contructor con parametros
+     */
+    public Persona(String nombre, String apellido, int edad, String casa, String varita, String tipo) {
+        this.nombre = nombre;
+        this.apellido = apellido;
+        this.edad = edad;
+        this.casa = casa;
+        this.varita = varita;
+        this.tipo = tipo;
+    }
+    
+    public String getNombre() {
+        return nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public String getApellido() {
+        return apellido;
+    }
+
+    public void setApellido(String apellido) {
+        this.apellido = apellido;
+    }
+
+    public int getEdad() {
+        return edad;
+    }
+
+    public void setEdad(int edad) {
+        this.edad = edad;
+    }
+
+    public String getCasa() {
+        return casa;
+    }
+
+    public void setCasa(String casa) {
+        this.casa = casa;
+    }
+
+    public String getVarita() {
+        return varita;
+    }
+
+    public void setVarita(String varita) {
+        this.varita = varita;
+    }
+
+    public String getTipo() {
+        return tipo;
+    }
+
+    public void setTipo(String tipo) {
+        this.tipo = tipo;
+    }
+
+    @Override
+    public String toString() {
+        return "Persona{" + "nombre=" + nombre + ", apellido=" + apellido + ", edad=" + edad + ", casa=" + casa + ", varita=" + varita + ", tipo=" + tipo + '}';
+    }
+    
+    
+}
