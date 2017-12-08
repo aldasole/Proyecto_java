@@ -1,0 +1,75 @@
+
+/**
+ * @author Aldair 
+ * Un Profesor es una Persona por lo cual no es necesario crear de nuevo todas las variables
+ */
+public class Profesor extends Persona {
+    
+    public String fechaIngreso;
+    public String animal="null";
+    public String hechizo="null";
+    public String pocion="null";
+    public String deporte="null";
+    /**
+     * Contructor vacio para crear objetos
+     */
+    public Profesor() {
+        
+    }
+    /**
+     * Contructor con parametros
+     */
+    public Profesor(String fechaIngreso, String animal, String hechizo, String pocion, String deporte, String nombre, String apellido, int edad, String casa, String varita, String tipo) {
+        super(nombre, apellido, edad, casa, varita, tipo);
+        this.fechaIngreso = fechaIngreso;
+        this.animal = animal;
+        this.hechizo = hechizo;
+        this.pocion = pocion;
+        this.deporte = deporte;
+    }
+
+    public String getFechaIngreso() {
+        return fechaIngreso;
+    }
+
+    public void setFechaIngreso(String fechaIngreso) {
+        this.fechaIngreso = fechaIngreso;
+    }
+
+    public String getAnimal() {
+        return animal;
+    }
+
+    public void setAnimal(String animal) {
+        this.animal = animal;
+    }
+
+    public String getHechizo() {
+        return hechizo;
+    }
+
+    public void setHechizo(String hechizo) {
+        this.hechizo = hechizo;
+    }
+
+    public String getPocion() {
+        return pocion;
+    }
+
+    public void setPocion(String pocion) {
+        this.pocion = pocion;
+    }
+
+    public String getDeporte() {
+        return deporte;
+    }
+
+    public void setDeporte(String deporte) {
+        this.deporte = deporte;
+    }
+
+    @Override
+    public String toString() {
+        return "\nNOMBRE: " + nombre + " " + apellido + "\nEDAD: " + edad + " años\nVARITA: " + varita + "\nFECHA DE INGRESO: " + fechaIngreso + "\nTIPO: " + tipo + "\nANIMAL: " + animal + "\nHECHIZO: " + hechizo + "\nPOCION: " + pocion + "\nDEPORTE: " + deporte ;
+    }
+}
