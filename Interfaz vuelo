@@ -1,0 +1,8 @@
+/**
+ * @author Aldair
+ * Interface con metodos abstractos
+ */
+public interface Vuelo {
+     public abstract void despegar (String tipo);
+     public abstract void volar(String tipo);
+}
