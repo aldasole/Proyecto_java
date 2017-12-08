@@ -1,0 +1,83 @@
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.util.LinkedList;
+
+public class LeerRegistro {
+   
+// * @author Aldair 
+// * Esta clase Leemos y modificamos el fichero registro
+// */
+
+    private boolean band=true;
+     /**
+     * @return  LinkedList<Registro> retornamos una lista de Registros
+     * Cargamos todos los registros al sistema 
+     */
+    public LinkedList<Registro> cargarRegistro( ) {
+        FileReader fr;
+        BufferedReader br = null;
+        String linea;
+        String valores[];
+        Registro r1;
+        LinkedList<Registro> registro=new LinkedList<>();
+        
+        try {
+            int acum=0;
+            fr = new FileReader("registros.txt");
+            br = new BufferedReader(fr);
+            
+            while ((linea = br.readLine()) != null) {
+                if(acum==1){
+                    valores = linea.split(",", 10);
+                    r1 = new Registro();
+                    r1.fecha=valores[0];
+                    r1.nombre=valores[1];
+                    r1.apellido=valores[3];
+                    r1.materia=valores[4];
+                    r1.tipo=valores[5];
+                    registro.add(r1);
+                }else{
+                    acum=1;
+                }
+            }
+        } catch (FileNotFoundException ex) {
+            System.out.println("El archivo no existe");
+        } catch (IOException ex) {
+            System.out.println("Error de Lectura");
+        }
+        return registro;
+    }
+    /**
+     * @param  Registro registro  recibe como parametro un Registro
+     * Guardamos un registro de una materia
+     */
+    public void guardarRegistro( Registro registro) {
+        FileWriter fw;
+        BufferedWriter bw;
+        PrintWriter pw;
+
+        try {
+            fw = new FileWriter("registros.txt",true);
+            bw = new BufferedWriter(fw);
+            pw = new PrintWriter(bw);
+            pw.write(registro.fecha+",");
+            pw.write(registro.nombre+",");
+            pw.write(registro.apellido+",");
+            pw.write(registro.materia+",");
+            pw.println(registro.tipo);
+            pw.close();
+            bw.close();  
+            System.out.println("\nSe ha creado con exito el Curso\n ");
+            System.out.println(registro);
+        } catch (IOException ex) {
+            System.out.println("ERROR: No se puedo guardar el registro");
+        }
+    }
+}
+
+    
