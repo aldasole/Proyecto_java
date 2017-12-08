@@ -1,0 +1,105 @@
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.util.LinkedList;
+
+/**
+ *
+ * @author Aldair
+ */
+public class LeerProfesor {
+    /**
+ * @author Ariana Ochoa
+ * @author Karina Sailema
+ * @author Aldair Soledispa
+ * Esta clase Leemos y modificamos el fichero profesor
+ */
+    private boolean band=true;
+     /**
+     * @return  LinkedList<Profesoro> retornamos una lista de Profesores 
+     * Cargamos todos los profesores del archivo profesores.txt
+     */
+    public LinkedList<Profesor> cargarProfesor() {
+        FileReader fr;
+        BufferedReader br = null;
+        String linea;
+        String valores[];
+        Profesor p1;
+        LinkedList<Profesor> profesor=new LinkedList<>();
+        
+        try {
+            int acum=0;
+            fr = new FileReader("profesores.txt");
+            br = new BufferedReader(fr);
+            
+            while ((linea = br.readLine()) != null) {
+                if(acum==1){
+                    
+                    valores = linea.split(",", 10);
+                    p1 = new Profesor();
+                    p1.nombre=valores[0];
+                    p1.apellido=valores[1];
+                    p1.edad=Integer.parseInt(valores[2]);
+                    p1.varita=valores[3];
+                    p1.fechaIngreso=valores[4];
+                    p1.tipo=valores[5];
+                    p1.animal=valores[6];
+                    p1.hechizo=valores[7];
+                    p1.pocion=valores[8];
+                    p1.deporte=valores[9];
+
+                    profesor.add(p1);
+                }else{
+                    acum=1;
+                }
+            }
+        } catch (FileNotFoundException ex) {
+            System.out.println("El archivo no existe");
+        } catch (IOException ex) {
+            System.out.println("Error de Lectura");
+        }
+        return profesor;
+    }
+    /**
+     * @param  Profesor profesor  recibe como parametro un Profesor
+     * Guardamos un profesor en el archivo profesores.txt
+     */
+    public void guardarProfesor(Profesor profesor) {
+        FileWriter fw;
+        BufferedWriter bw;
+        PrintWriter pw;
+
+        try {
+            fw = new FileWriter("profesores.txt",true);
+            bw = new BufferedWriter(fw);
+            pw = new PrintWriter(bw);
+            pw.write(profesor.nombre+",");
+            pw.write(profesor.apellido+",");
+            pw.write(profesor.edad+",");
+            pw.write(profesor.varita+",");
+            pw.write(profesor.fechaIngreso+",");
+            pw.write(profesor.tipo+",");
+            pw.write(profesor.animal+",");
+            pw.write(profesor.hechizo+",");
+            pw.print(profesor.pocion+",");
+            pw.println(profesor.deporte);
+            pw.close();
+            bw.close();
+            
+            System.out.println("\nSe ha creado con exito el Profesor\n ");
+            System.out.println(profesor);
+            
+        } catch (IOException ex) {
+            System.out.println("ERROR: No se puedo guardar el profesor");
+        }
+    }
+   
+    
+}
+
+    
+
